@@ -26,6 +26,11 @@ const App = () => {
 		},
 	];
 
+	const addExpenseHandler = (expense) => {
+		console.log("In app.js");
+		console.log(expense);
+	};
+
 	// React 작동방식.
 
 	// return React.createElement(
@@ -37,7 +42,7 @@ const App = () => {
 
 	return (
 		<div>
-			<NewExpenses />
+			<NewExpenses onAddExpense={addExpenseHandler} />
 			<Expenses items={expenses} />
 		</div>
 	);
