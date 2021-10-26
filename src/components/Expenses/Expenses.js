@@ -17,6 +17,7 @@ const Expenses = (props) => {
 					seleted={filteredYear}
 					onChangeFilter={filterChangeHandler}
 				/>
+				{/* map를 사용해서 데이터 목록을 동적으로 출력 */}
 				{props.items.map((expense) => (
 					<ExpenseItem
 						title={expense.title}
