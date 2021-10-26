@@ -20,6 +20,7 @@ const Expenses = (props) => {
 				{/* map를 사용해서 데이터 목록을 동적으로 출력 */}
 				{props.items.map((expense) => (
 					<ExpenseItem
+						key={expense.id}
 						title={expense.title}
 						amount={expense.amount}
 						date={expense.date}
