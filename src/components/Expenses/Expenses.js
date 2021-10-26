@@ -5,10 +5,14 @@ import "./Expenses.css";
 import ExpensesFilter from "./ExpensesFilter";
 
 const Expenses = (props) => {
-	const [filteredYear, setFilteredYear] = useState("2020");
+	const [filteredYear, setFilteredYear] = useState("2021");
 	const filterChangeHandler = (selectedYear) => {
 		setFilteredYear(selectedYear);
 	};
+
+	const filterExpenses = props.items.filter((expense) => {
+		return expense.date.getFullYear().toString() === filteredYear;
+	});
 
 	return (
 		<div>
@@ -18,7 +22,7 @@ const Expenses = (props) => {
 					onChangeFilter={filterChangeHandler}
 				/>
 				{/* map를 사용해서 데이터 목록을 동적으로 출력 */}
-				{props.items.map((expense) => (
+				{filterExpenses.map((expense) => (
 					<ExpenseItem
 						key={expense.id}
 						title={expense.title}
