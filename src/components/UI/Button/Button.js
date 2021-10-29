@@ -1,7 +1,7 @@
 import React from "react";
 // import styled from "styled-components";
 
-import styles from "./Button.module.css";
+import styles from "./Button.css";
 
 // const Button = styled.button`
 // 	width: 100%;

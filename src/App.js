@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import CourseGoalList from "./components/CourseGoals/CourseGoalList/CourseGoalList";
 import CourseInput from "./components/CourseGoals/CourseInput/CourseInput";
+import UserInput from "./components/Practice/UserInput/UserInput";
 import "./App.css";
 
 // const App = () => {
@@ -55,6 +56,12 @@ import "./App.css";
 // };
 
 const App = () => {
-	return <div></div>;
+	return (
+		<div>
+			<section id="user-form">
+				<UserInput />
+			</section>
+		</div>
+	);
 };
 export default App;
