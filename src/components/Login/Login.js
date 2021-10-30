@@ -12,9 +12,19 @@ const Login = (props) => {
 	const [formIsValid, setFormIsValid] = useState(false);
 
 	useEffect(() => {
-		setFormIsValid(
-			enteredEmail.includes("@") && enteredPassword.trim().length > 6,
-		);
+		const identifier = setTimeout(() => {
+			console.log("setTimeout test");
+			setFormIsValid(
+				enteredEmail.includes("@") && enteredPassword.trim().length > 6,
+			);
+		}, 500);
+
+		// cleanUp function : useEffect 함수가 실행 될 때마다, 처음 실행되는 경우를 제외하고는
+		// cleanUp function이 실행되면서, setTimeout 함수 (side function)가 재실행 됨.
+		return () => {
+			console.log("cleanUp ");
+			clearTimeout(identifier);
+		};
 		// Dependency(종속성)(enteredEmail, enteredPassword)가 변경될 때마다, 다시 실행 됨.
 	}, [enteredEmail, enteredPassword]);
 
