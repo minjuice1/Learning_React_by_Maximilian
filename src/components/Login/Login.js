@@ -55,33 +55,34 @@ const Login = (props) => {
 	// 	// 만약 enteredEmail가 있다면 => enteredEmail에서 업데이트를 할 경우 계속 "EFFECT RUNNING" 실행.
 	// }, [enteredEmail]);
 
-	// useEffect(() => {
-	// 	const identifier = setTimeout(() => {
-	// 		console.log("setTimeout test");
-	// 		setFormIsValid(
-	// 			enteredEmail.includes("@") && enteredPassword.trim().length > 6,
-	// 		);
-	// 	}, 500);
+	const { isValid: emailIsValid } = emailState;
+	const { isValid: passwordIsValid } = passwordState;
 
-	// 	// cleanUp function : useEffect 함수가 실행 될 때마다, 처음 실행되는 경우를 제외하고는
-	// 	// cleanUp function이 실행되면서, setTimeout 함수 (side function)가 재실행 됨.
-	// 	return () => {
-	// 		console.log("cleanUp ");
-	// 		clearTimeout(identifier);
-	// 	};
-	// 	// Dependency(종속성)(enteredEmail, enteredPassword)가 변경될 때마다, 다시 실행 됨.
-	// }, [enteredEmail, enteredPassword]);
+	useEffect(() => {
+		const identifier = setTimeout(() => {
+			console.log("setTimeout test");
+			setFormIsValid(emailIsValid && passwordIsValid);
+		}, 500);
+
+		// cleanUp function : useEffect 함수가 실행 될 때마다, 처음 실행되는 경우를 제외하고는
+		// cleanUp function이 실행되면서, setTimeout 함수 (side function)가 재실행 됨.
+		return () => {
+			console.log("cleanUp ");
+			clearTimeout(identifier);
+		};
+		// Dependency(종속성)(enteredEmail, enteredPassword)가 변경될 때마다, 다시 실행 됨.
+	}, [emailIsValid, passwordIsValid]);
 
 	const emailChangeHandler = (event) => {
 		dispatchEmail({ type: "USER_INPUT", val: event.target.value });
 
-		setFormIsValid(event.target.value.includes("@") && passwordState.isValid);
+		// setFormIsValid(event.target.value.includes("@") && passwordState.isValid);
 	};
 
 	const passwordChangeHandler = (event) => {
 		dispatchPassword({ type: "USER_INPUT", val: event.target.value });
 
-		setFormIsValid(emailState.isValid && event.target.value.trim().length > 6);
+		// setFormIsValid(emailState.isValid && event.target.value.trim().length > 6);
 	};
 
 	const validateEmailHandler = () => {
