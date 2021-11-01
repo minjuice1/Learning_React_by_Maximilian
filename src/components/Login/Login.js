@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useState, useEffect, useReducer, useContext } from "react";
 
 import Card from "../UI/Card/Card";
 import classes from "./Login.module.css";
 import Button from "../UI/Button/Button";
+import AuthContext from "../../store/auth-context";
 
 const emailReducer = (state, action) => {
 	if (action.type === "USER_INPUT") {
@@ -41,6 +42,8 @@ const Login = (props) => {
 		isValid: null,
 	});
 
+	const authCtx = useContext(AuthContext);
+
 	// useEffect(() => {
 	// 	console.log("EFFECT RUNNING");
 
@@ -55,6 +58,8 @@ const Login = (props) => {
 	// 	// 만약 enteredEmail가 있다면 => enteredEmail에서 업데이트를 할 경우 계속 "EFFECT RUNNING" 실행.
 	// }, [enteredEmail]);
 
+	// 유효성 검사를 최적화 : 프롬프트가 변경될 때마다 효과를 다시 실행하지 않고
+	// 일부 프롬프트가 변경 될 때만 유효성 검사.
 	const { isValid: emailIsValid } = emailState;
 	const { isValid: passwordIsValid } = passwordState;
 
@@ -95,7 +100,7 @@ const Login = (props) => {
 
 	const submitHandler = (event) => {
 		event.preventDefault();
-		props.onLogin(emailState.value, passwordState.value);
+		authCtx.onLogin(emailState.value, passwordState.value);
 	};
 
 	return (
